@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/AdminLTE.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/_all-skins.min.css}">
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+    <!-- Header -->
+    <header th:replace="admin/fragments/header :: header"></header>
+    <!-- Sidebar -->
+    <aside th:replace="admin/fragments/sidebar :: sidebar"></aside>
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>Dashboard</h1>
+        </section>
+
+        <section class="content">
+            <div class="row">
+                <div class="col-lg-3 col-xs-6">
+                    <div class="small-box bg-aqua">
+                        <div class="inner">
+                            <h3 th:text="${totalUsers}">50</h3>
+                            <p>Người dùng</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-users"></i>
+                        </div>
+                        <a href="/admin/users" class="small-box-footer">Xem chi tiết <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-xs-6">
+                    <div class="small-box bg-green">
+                        <div class="inner">
+                            <h3 th:text="${totalFacilities}">20</h3>
+                            <p>Cơ sở vật chất</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-building"></i>
+                        </div>
+                        <a href="/admin/facilities" class="small-box-footer">Xem chi tiết <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-xs-6">
+                    <div class="small-box bg-yellow">
+                        <div class="inner">
+                            <h3 th:text="${newReports}">5</h3>
+                            <p>Báo cáo mới</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-exclamation-triangle"></i>
+                        </div>
+                        <a href="/admin/reports" class="small-box-footer">Xem chi tiết <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer th:replace="admin/fragments/footer :: footer"></footer>
+</div>
+
+<script th:src="@{/assets/js/jquery.min.js}"></script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/adminlte.min.js}"></script>
+</body>
+</html>

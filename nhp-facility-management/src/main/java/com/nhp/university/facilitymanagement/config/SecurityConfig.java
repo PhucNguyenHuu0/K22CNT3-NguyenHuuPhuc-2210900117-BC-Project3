@@ -11,10 +11,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable()) // Tắt CSRF để API hoạt động
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/public/**").permitAll()
-                .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                .requestMatchers("/", "/admin").permitAll()  // Cho phép truy cập không cần đăng nhập
                 .anyRequest().authenticated()
             )
             .formLogin()
