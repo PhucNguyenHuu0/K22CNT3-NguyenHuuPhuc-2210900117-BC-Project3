@@ -2,18 +2,22 @@ package com.nhp.university.facilitymanagement.controller;
 
 import com.nhp.university.facilitymanagement.model.MaintenanceRequest;
 import com.nhp.university.facilitymanagement.service.MaintenanceRequestService;
-import lombok.RequiredArgsConstructor;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/maintenance-requests")
-@RequiredArgsConstructor  // Lombok sẽ tự động inject requestService
+@RequestMapping("/api/requests")
 public class MaintenanceRequestController {
+    private final MaintenanceRequestService requestService;
 
-    private final MaintenanceRequestService requestService = null;
+    @Autowired
+    public MaintenanceRequestController(MaintenanceRequestService requestService) {
+        this.requestService = requestService;
+    }
 
     @GetMapping
     public ResponseEntity<List<MaintenanceRequest>> getAllRequests() {
@@ -21,8 +25,13 @@ public class MaintenanceRequestController {
     }
 
     @PostMapping
-    public ResponseEntity<MaintenanceRequest> createRequest(@RequestBody MaintenanceRequest request) {
+    public ResponseEntity<MaintenanceRequest> createRequest(@Valid @RequestBody MaintenanceRequest request) {
         return ResponseEntity.ok(requestService.createRequest(request));
+    }
+
+    @PutMapping("/{id}/status")
+    public ResponseEntity<MaintenanceRequest> updateRequestStatus(@PathVariable Long id, @RequestParam MaintenanceRequest.RequestStatus status) {
+        return ResponseEntity.ok(requestService.updateRequestStatus(id, status));
     }
 
     @DeleteMapping("/{id}")

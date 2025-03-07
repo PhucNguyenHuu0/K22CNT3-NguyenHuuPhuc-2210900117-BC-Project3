@@ -2,7 +2,7 @@ package com.nhp.university.facilitymanagement.controller;
 
 import com.nhp.university.facilitymanagement.model.Facility;
 import com.nhp.university.facilitymanagement.service.FacilityService;
-
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/facilities")
+@RequestMapping("/api/facilities")
 public class FacilityController {
-
     private final FacilityService facilityService;
 
     @Autowired
@@ -21,13 +20,13 @@ public class FacilityController {
     }
 
     @GetMapping
-    public List<Facility> getAllFacilities() {
-        return facilityService.getAllFacilities();
+    public ResponseEntity<List<Facility>> getAllFacilities() {
+        return ResponseEntity.ok(facilityService.getAllFacilities());
     }
 
     @PostMapping
-    public Facility createFacility(@RequestBody Facility facility, @RequestParam Long userId) {
-        return facilityService.createFacility(facility, userId);
+    public ResponseEntity<Facility> createFacility(@Valid @RequestBody Facility facility, @RequestParam Long userId) {
+        return ResponseEntity.ok(facilityService.addFacility(facility, userId));
     }
 
     @DeleteMapping("/{id}")

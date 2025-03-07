@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Trang Lỗi</title>
+    <meta charset="UTF-8">
+    <title>Error</title>
 </head>
 <body>
-    <h1>404 - Không tìm thấy trang</h1>
-    <p>Xin lỗi, trang bạn yêu cầu không tồn tại.</p>
-    <a href="/">Quay về Trang chủ</a>
+    <h1>Error</h1>
+    <p th:text="'Error Code: ' + ${errorCode}"></p>
+    <p>The page you are looking for might be removed, had its name changed, or is temporarily unavailable.</p>
 </body>
 </html>

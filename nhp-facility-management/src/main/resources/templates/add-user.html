@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Thêm Người Dùng</title>
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/AdminLTE.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/skins/_all-skins.min.css}">
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <header th:replace="admin/fragments/header :: header"></header>
+    <aside th:replace="admin/fragments/sidebar :: sidebar"></aside>
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>Thêm Người Dùng</h1>
+        </section>
+        <section class="content">
+            <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+            <form th:action="@{/admin/users/add}" th:object="${user}" method="post">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" th:field="*{username}" class="form-control" required="required" />
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" th:field="*{password}" class="form-control" required="required" />
+                </div>
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" th:field="*{name}" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" th:field="*{email}" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="role">Role:</label>
+                    <select id="role" th:field="*{role}" class="form-control" required="required">
+                        <option value="ROLE_USER">User</option>
+                        <option value="ROLE_ADMIN">Admin</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a th:href="@{/admin/users}" class="btn btn-default">Cancel</a>
+            </form>
+        </section>
+    </div>
+
+    <footer th:replace="admin/fragments/footer :: footer"></footer>
+</div>
+<script th:src="@{/assets/js/jquery.min.js}"></script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/adminlte.min.js}"></script>
+</body>
+</html>

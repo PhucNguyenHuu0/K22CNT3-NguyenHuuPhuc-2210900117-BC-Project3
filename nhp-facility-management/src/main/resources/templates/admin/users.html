@@ -5,10 +5,11 @@
     <title>Quản lý Người Dùng</title>
     <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/assets/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/AdminLTE.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/skins/_all-skins.min.css}">
 </head>
-<body>
+<body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-
     <header th:replace="admin/fragments/header :: header"></header>
     <aside th:replace="admin/fragments/sidebar :: sidebar"></aside>
 
@@ -16,8 +17,8 @@
         <section class="content-header">
             <h1>Quản lý Người Dùng</h1>
         </section>
-
         <section class="content">
+            <a th:href="@{/admin/users/add}" class="btn btn-primary mb-3">Thêm Người Dùng</a>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -25,7 +26,6 @@
                         <th>Tên</th>
                         <th>Email</th>
                         <th>Vai Trò</th>
-                        <th>Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,10 +34,6 @@
                         <td th:text="${user.name}"></td>
                         <td th:text="${user.email}"></td>
                         <td th:text="${user.role}"></td>
-                        <td>
-                            <a th:href="@{'/admin/users/edit/' + ${user.id}}" class="btn btn-warning btn-sm">Sửa</a>
-                            <a th:href="@{'/admin/users/delete/' + ${user.id}}" class="btn btn-danger btn-sm">Xóa</a>
-                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -46,8 +42,8 @@
 
     <footer th:replace="admin/fragments/footer :: footer"></footer>
 </div>
-
 <script th:src="@{/assets/js/jquery.min.js}"></script>
 <script th:src="@{/assets/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/adminlte.min.js}"></script>
 </body>
 </html>
