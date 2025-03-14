@@ -1,23 +1,49 @@
 package com.nhp.university.facilitymanagement.model;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 
 @Entity
-@Getter
-@Setter
+@Table(name = "NHP_LOCATION")
 public class Location {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Name is required")
     @Column(nullable = false)
-    private String name;
+    private String building;  // Tòa nhà
 
-    @NotBlank(message = "Address is required")
     @Column(nullable = false)
-    private String address;
+    private String floor;  // Tầng
+
+    // Getter & Setter
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(String building) {
+        this.building = building;
+    }
+
+    public String getFloor() {
+        return floor;
+    }
+
+    public void setFloor(String floor) {
+        this.floor = floor;
+    }
 }

@@ -1,17 +1,15 @@
 package com.nhp.university.facilitymanagement.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.boot.web.servlet.error.ErrorController;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
-@Controller
-public class CustomErrorController implements ErrorController {
-    @RequestMapping("/error")
-    public String handleError(HttpServletRequest request, Model model) {
-        Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
-        model.addAttribute("errorCode", statusCode != null ? statusCode : 500);
-        return "error";
+@ControllerAdvice
+public class CustomErrorController {
+
+    @ExceptionHandler(Exception.class)
+    public String handleException(Exception e, Model model) {
+        model.addAttribute("error", e.getMessage());
+        return "error"; // Trả về trang lỗi
     }
 }

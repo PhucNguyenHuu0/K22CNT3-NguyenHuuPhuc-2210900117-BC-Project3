@@ -1,22 +1,15 @@
 package com.nhp.university.facilitymanagement.controller;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
+@RequestMapping("/")
 public class HomeController {
-    @GetMapping("/")
-    public String home() {
-        return "index";
-    }
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
-
-    @GetMapping("/403")
-    public String accessDenied() {
-        return "403";
+    @GetMapping
+    public String homePage() {
+        return "Chào mừng bạn đến với Hệ thống Quản lý Cơ sở vật chất!";
     }
 }

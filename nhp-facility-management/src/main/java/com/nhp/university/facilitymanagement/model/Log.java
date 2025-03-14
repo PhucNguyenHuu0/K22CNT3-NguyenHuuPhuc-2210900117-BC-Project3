@@ -1,33 +1,24 @@
 package com.nhp.university.facilitymanagement.model;
 
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-
-import java.time.LocalDateTime;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
-@Getter
-@Setter
+@Table(name = "logs")
 public class Log {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String message;
 
-    @Column(nullable = false)
-    private Long userId;
+    public Log() {}
+    public Log(String message) { this.message = message; }
 
-    @Column(nullable = false)
-    private String action;
-
-    @Column
-    private String details;
-
-    @Column(nullable = false, updatable = false)
-    private LocalDateTime timestamp;
-
-    @PrePersist
-    protected void onCreate() {
-        timestamp = LocalDateTime.now();
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public String getMessage() { return message; }
+    public void setMessage(String message) { this.message = message; }
 }

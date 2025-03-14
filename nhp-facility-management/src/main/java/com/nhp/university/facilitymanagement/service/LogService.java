@@ -1,5 +1,7 @@
 package com.nhp.university.facilitymanagement.service;
 
-public class LogService {
+import com.nhp.university.facilitymanagement.model.Log;
 
+public interface LogService {
+    void saveLog(Log log);
 }

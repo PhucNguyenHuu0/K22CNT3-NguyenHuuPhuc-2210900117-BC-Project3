@@ -2,7 +2,6 @@ package com.nhp.university.facilitymanagement.controller;
 
 import com.nhp.university.facilitymanagement.model.Room;
 import com.nhp.university.facilitymanagement.service.RoomService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,12 +25,24 @@ public class RoomController {
     }
 
     @PostMapping
-    public ResponseEntity<Room> createRoom(@Valid @RequestBody Room room, @RequestParam Long locationId) {
-        return ResponseEntity.ok(roomService.createRoom(room, locationId));
+    public ResponseEntity<Room> addRoom(@RequestBody Room room) {
+        return ResponseEntity.ok(roomService.saveRoom(room));
     }
 
-    @PutMapping("/{roomId}")
-    public ResponseEntity<Room> updateRoom(@PathVariable Long roomId, @Valid @RequestBody Room room) {
-        return ResponseEntity.ok(roomService.updateRoom(roomId, room));
+    @GetMapping("/{id}")
+    public ResponseEntity<Room> getRoomById(@PathVariable Long id) {
+        return ResponseEntity.ok(roomService.getRoomById(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Room> updateRoom(@PathVariable Long id, @RequestBody Room room) {
+        room.setId(id);
+        return ResponseEntity.ok(roomService.saveRoom(room));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteRoom(@PathVariable Long id) {
+        roomService.deleteRoom(id);
+        return ResponseEntity.noContent().build();
     }
 }

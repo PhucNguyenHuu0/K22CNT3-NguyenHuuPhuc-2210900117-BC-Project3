@@ -1,33 +1,26 @@
 package com.nhp.university.facilitymanagement.controller.admin;
 
-import com.nhp.university.facilitymanagement.service.FacilityService;
-import com.nhp.university.facilitymanagement.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @Controller
+@RequestMapping("/admin/dashboard")
 public class AdminController {
-    private final UserService userService;
-    private final FacilityService facilityService;
 
-    @Autowired
-    public AdminController(UserService userService, FacilityService facilityService) {
-        this.userService = userService;
-        this.facilityService = facilityService;
+    @GetMapping
+    public String showAdminDashboard() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+            return "admin/dashboard"; // Chỉ Admin mới vào được
+        }
+        return "redirect:/access-denied"; // Nếu không phải Admin thì từ chối truy cập
     }
 
-    @GetMapping("/admin")
-    public String adminOverview(Model model) {
-        try {
-            model.addAttribute("totalUsers", userService.getAllUsers().size());
-            model.addAttribute("totalFacilities", facilityService.getAllFacilities().size());
-        } catch (Exception e) {
-            model.addAttribute("totalUsers", 0);
-            model.addAttribute("totalFacilities", 0);
-            model.addAttribute("error", "Không thể tải dữ liệu: " + e.getMessage());
-        }
-        return "admin";
+    @GetMapping("/api")
+    public String getAdminDashboard(Authentication authentication) {
+        return "Xin chào ADMIN: " + authentication.getName() + ". Đây là trang Dashboard của Admin.";
     }
 }
